@@ -1205,8 +1205,145 @@ td {
     </script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.js"></script>
 <link href="./icon.svg?d5c238c2cf2e4f08" rel="icon" sizes="any" type="image/svg+xml"/>
+
+<!-- model-spec version banner style -->
+<style id="model-spec-version-banner-style">.model-spec-version-banner-slot[hidden] {
+  display: none !important;
+}
+
+.model-spec-version-banner-slot {
+  margin: 0 0 32px;
+}
+
+.model-spec-version-banner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  align-items: center;
+  padding: 22px 24px;
+  border: 1px solid rgba(171, 112, 24, 0.2);
+  border-radius: 22px;
+  background: #f6dfb8;
+  box-shadow: 0 20px 50px rgba(146, 90, 19, 0.12);
+  color: #2f2112;
+}
+
+.model-spec-version-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0) 48%
+  );
+}
+
+.model-spec-version-banner-copy {
+  position: relative;
+  flex: 1 1 360px;
+  min-width: min(100%, 320px);
+}
+
+.model-spec-version-banner-title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #221508;
+}
+
+.model-spec-version-banner-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(47, 33, 18, 0.86);
+}
+
+.model-spec-version-banner-actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.model-spec-version-banner-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.model-spec-version-banner-action:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.model-spec-version-banner-action--primary {
+  background: #1f1206;
+  color: #fff9f1;
+  box-shadow: 0 10px 24px rgba(31, 18, 6, 0.16);
+}
+
+.model-spec-version-banner-action--primary:hover {
+  background: #120900;
+}
+
+.model-spec-version-banner-action--secondary {
+  border-color: rgba(88, 49, 5, 0.16);
+  background: rgba(255, 255, 255, 0.62);
+  color: #3a2710;
+}
+
+.model-spec-version-banner-action--secondary:hover {
+  border-color: rgba(88, 49, 5, 0.3);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 700px) {
+  .model-spec-version-banner-slot {
+    margin-bottom: 24px;
+  }
+
+  .model-spec-version-banner {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .model-spec-version-banner-title {
+    font-size: 22px;
+  }
+
+  .model-spec-version-banner-text {
+    font-size: 15px;
+  }
+
+  .model-spec-version-banner-actions {
+    width: 100%;
+  }
+
+  .model-spec-version-banner-action {
+    flex: 1 1 100%;
+  }
+}</style>
+<!-- /model-spec version banner style -->
 </head>
-<body>
+<body data-model-spec-version="2025-04-11">
 <div class="nav">
 <div class="nav-top">
 <div class="logo-container">
@@ -1611,6 +1748,21 @@ td {
 </div>
 <div class="main">
 <div class="content">
+<!-- model-spec version banner -->
+<div class="model-spec-version-banner-slot" data-model-spec-banner-root hidden>
+  <section class="model-spec-version-banner" role="status" aria-live="polite">
+    <div class="model-spec-version-banner-copy">
+      <div class="model-spec-version-banner-title">A newer version of the Model Spec is available.</div>
+      <p class="model-spec-version-banner-text">This version is provided for historical reference and may not reflect current policy.</p>
+    </div>
+    <div class="model-spec-version-banner-actions">
+      <a href="https://model-spec.openai.com/" class="model-spec-version-banner-action model-spec-version-banner-action--primary">Read latest version</a>
+      <a href="https://github.com/openai/model_spec/blob/main/CHANGELOG.md" class="model-spec-version-banner-action model-spec-version-banner-action--secondary">See all versions</a>
+    </div>
+  </section>
+</div>
+<!-- /model-spec version banner -->
+
 <div class="date">April 11, 2025</div>
 <div class="main-title">OpenAI Model Spec</div>
 <div class="main-subtitle">
@@ -18823,5 +18975,39 @@ Maybe it’s just more of a good thing?</p></div>
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<!-- model-spec version banner runtime -->
+<script id="model-spec-version-banner-runtime">(function () {
+  const body = document.body;
+  const bannerRoot = document.querySelector("[data-model-spec-banner-root]");
+  const currentVersion = body && body.getAttribute("data-model-spec-version");
+  if (!body || !bannerRoot || !currentVersion) {
+    return;
+  }
+
+  fetch("./version-manifest.json", {
+    credentials: "same-origin",
+    cache: "no-cache",
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        return null;
+      }
+      return response.json();
+    })
+    .then(function (manifest) {
+      if (!manifest || typeof manifest.latest_version !== "string") {
+        return;
+      }
+      if (manifest.latest_version === currentVersion) {
+        return;
+      }
+      bannerRoot.hidden = false;
+    })
+    .catch(function () {
+      // Leave archived pages banner-free if the manifest is unavailable.
+    });
+})();</script>
+<!-- /model-spec version banner runtime -->
 </body>
 </html>
